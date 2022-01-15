@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -115,6 +117,7 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
             : Padding(
                 padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
                 child: ListView.builder(
+                    scrollDirection: Axis.vertical,
                     physics: BouncingScrollPhysics(),
                     itemCount: _filteredCountries.length,
                     itemBuilder: (context, index) => GestureDetector(
