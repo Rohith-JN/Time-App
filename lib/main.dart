@@ -1,9 +1,10 @@
 import 'package:clock_app/Screens/mainScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MaterialApp(
+  runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     home: const MainScreen(),
     theme: ThemeData(
