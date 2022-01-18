@@ -4,6 +4,7 @@ import 'package:clock_app/Screens/AlarmScreen.dart';
 import 'package:clock_app/Screens/ClockScreen.dart';
 import 'package:clock_app/Screens/StopWatchScreen.dart';
 import 'package:clock_app/Screens/TimerScreen.dart';
+import 'package:clock_app/Screens/WorldClockScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
       statusBarColor: Colors.grey[800],
     ));
     return DefaultTabController(
-        length: 4,
+        length: 5,
         child: SafeArea(
             child: Scaffold(
           appBar: PreferredSize(
@@ -31,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
               color: Colors.grey[800],
               height: 85.0,
               width: double.infinity,
-              child: TabBar(
+              child: const TabBar(
                 indicator: const UnderlineTabIndicator(
                     borderSide: BorderSide(
                         width: 5.0,
@@ -40,11 +41,18 @@ class _MainScreenState extends State<MainScreen> {
                     insets: EdgeInsets.symmetric(horizontal: 30.0)),
                 tabs: [
                   Tab(
-                    icon: Icon(FontAwesomeIcons.clock, size: 20.0,),
+                    icon: Icon(
+                      FontAwesomeIcons.clock,
+                      size: 20.0,
+                    ),
                     text: "Clock",
                   ),
+                  Tab(
+                    icon: Icon(Icons.public),
+                    text: "World",
+                  ),
                   Tab(icon: Icon(Icons.alarm), text: "Alarm"),
-                  Tab(icon: Icon(Icons.timer), text: "Stopwatch"),
+                  Tab(icon: Icon(Icons.timer), text: "Start-Stop"),
                   Tab(
                     icon: Icon(Icons.hourglass_bottom),
                     text: "Timer",
@@ -54,9 +62,10 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           body: const TabBarView(
-            physics: BouncingScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
               ClockScreen(),
+              WorldClock(),
               AlarmScreen(),
               StopWatchScreen(),
               TimerScreen()

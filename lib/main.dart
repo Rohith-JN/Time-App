@@ -1,9 +1,13 @@
 import 'package:clock_app/Screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
+  await GetStorage.init();
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     home: const MainScreen(),

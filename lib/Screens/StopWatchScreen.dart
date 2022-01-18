@@ -16,7 +16,7 @@ class _StopWatchScreenState extends State<StopWatchScreen>
   late AnimationController controller;
   bool isPlaying = false;
   bool lapClicked = false;
-  double value = 150.0;
+  double value = 190.0;
   final ScrollController scrollController = ScrollController();
 
   @override
@@ -62,7 +62,7 @@ class _StopWatchScreenState extends State<StopWatchScreen>
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.white, width: 5.0),
                     shape: BoxShape.circle),
-                duration: const Duration(seconds: 1),
+                duration: const Duration(milliseconds: 900),
                 curve: Curves.decelerate,
               ),
             ),
