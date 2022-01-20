@@ -16,14 +16,9 @@ class _TimerScreenState extends State<TimerScreen> {
         body: Center(
             child: Container(
       child: Center(
-          child: CupertinoTheme(
-        data: const CupertinoThemeData(
-            textTheme: CupertinoTextThemeData(
-                dateTimePickerTextStyle: TextStyle(color: Colors.white70))),
-        child: CupertinoTimerPicker(
-          onTimerDurationChanged: (Duration value) {},
-          mode: CupertinoTimerPickerMode.hms,
-        ),
+          child: CupertinoTimerPicker(
+        onTimerDurationChanged: (Duration value) {},
+        mode: CupertinoTimerPickerMode.hms,
       )),
       width: 350.0,
       height: 450.0,

@@ -13,22 +13,6 @@ class WorldTimeController extends GetxController {
   var newUrl;
   var newResponse;
 
-  Future<String> getTime(location) async {
-    newUrl = "http://worldtimeapi.org/api/timezone/$location";
-    newResponse = await get(Uri.parse(newUrl));
-    Map newData = jsonDecode(newResponse.body);
-    var time = newData['datetime'];
-    String dateTime = newData["utc_datetime"];
-    String offset = newData["utc_offset"];
-    DateTime now = DateTime.parse(dateTime);
-    now = now.add(Duration(
-        hours: int.parse(offset.substring(1, 3)),
-        minutes: int.parse(offset.substring(4))));
-    final newtime = DateFormat.jm().format(now);
-    log('$newtime - $location');
-    update(['clockid']);
-    return newtime;
-  }
 
   @override
   void onInit() {

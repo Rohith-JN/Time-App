@@ -14,6 +14,7 @@ void main() async {
     home: const MainScreen(),
     theme: ThemeData(
       cupertinoOverrideTheme: const CupertinoThemeData(
+          brightness: Brightness.dark,
           textTheme: CupertinoTextThemeData(
               textStyle: TextStyle(color: Colors.white))),
       splashColor: Colors.transparent,

@@ -33,10 +33,6 @@ class _WorldClockState extends State<WorldClock> {
         Timer.periodic(const Duration(milliseconds: 500), (timer) => _update());
   }
 
-  Future<String> getDataFromFuture() async {
-    return Future.delayed(Duration(seconds: 3), () => "Sample string");
-  }
-
   void _update() {
     setState(() {
       formattedTime = DateFormat('h:mm').format(DateTime.now());
@@ -48,6 +44,24 @@ class _WorldClockState extends State<WorldClock> {
   void dispose() {
     _timer.cancel();
     super.dispose();
+  }
+
+  var newUrl;
+  var newResponse;
+
+  Future<dynamic> getTime(location) async {
+    newUrl = "http://worldtimeapi.org/api/timezone/$location";
+    newResponse = await get(Uri.parse(newUrl));
+    Map newData = jsonDecode(newResponse.body);
+    var time = newData['datetime'];
+    String dateTime = newData["utc_datetime"];
+    String offset = newData["utc_offset"];
+    DateTime now = DateTime.parse(dateTime);
+    now = now.add(Duration(
+        hours: int.parse(offset.substring(1, 3)),
+        minutes: int.parse(offset.substring(4))));
+    String newtime = DateFormat.jm().format(now);
+    return newtime;
   }
 
   @override
@@ -99,53 +113,62 @@ class _WorldClockState extends State<WorldClock> {
                   height: 2.0,
                 ),
               ),
-              FutureBuilder<dynamic>(
-                  future: getDataFromFuture(),
-                  builder: (context, AsyncSnapshot asyncSnapshot) {
-                    if (asyncSnapshot.data != null) {
-                      return Container(
-                        height: 600.0,
-                        width: 450.0,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            physics: const BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: worldTimeController.WorldTimeList.length,
-                            itemBuilder: (BuildContext context, index) =>
-                                Padding(
-                              padding: const EdgeInsets.only(bottom: 18.0),
-                              child: Slidable(
-                                key: UniqueKey(),
-                                startActionPane: ActionPane(
+              Container(
+                height: 600.0,
+                width: 450.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: worldTimeController.WorldTimeList.length,
+                    itemBuilder: (BuildContext context, index) => Padding(
+                      padding: const EdgeInsets.only(bottom: 18.0),
+                      child: FutureBuilder(
+                          future: getTime(worldTimeController
+                              .WorldTimeList[index].location),
+                          builder: (context, AsyncSnapshot snapshot) {
+                            return Slidable(
+                              startActionPane: ActionPane(
+                                  extentRatio: 0.25,
                                   motion: ScrollMotion(),
-                                  dismissible: DismissiblePane(onDismissed: () {
-                                    worldTimeController.WorldTimeList.removeAt(
-                                        index);
-                                  }),
-                                  children: const [],
-                                ),
-                                child: ListTile(
-                                  leading: Text(
-                                      worldTimeController
-                                          .WorldTimeList[index].location,
-                                      style: GoogleFonts.lato(
-                                          color: Colors.white70, fontSize: 25)),
-                                  trailing: Text(
-                                    '${worldTimeController.getTime(worldTimeController.WorldTimeList[index].location)}',
-                                    style: GoogleFonts.lato(
-                                        color: Colors.white70, fontSize: 15.0),
+                                  children: [
+                                    SlidableAction(
+                                      onPressed: (v) {
+                                        worldTimeController.WorldTimeList
+                                            .removeAt(index);
+                                      },
+                                      icon: Icons.delete,
+                                      spacing: 15.0,
+                                      label: 'Delete',
+                                      backgroundColor: Colors.transparent,
+                                    )
+                                  ]),
+                              child: ListTile(
+                                  leading: Container(
+                                    child: ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                          minWidth: 10.0, maxWidth: 300.0),
+                                      child: Text(
+                                          worldTimeController
+                                              .WorldTimeList[index].location,
+                                          style: GoogleFonts.lato(
+                                              color: Colors.white70,
+                                              fontSize: 23)),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-                    return CircularProgressIndicator();
-                  }),
+                                  trailing: Text(
+                                    '${snapshot.data}',
+                                    style: GoogleFonts.lato(
+                                        color: Colors.white, fontSize: 35.0),
+                                  )),
+                            );
+                          }),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),

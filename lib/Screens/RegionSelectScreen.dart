@@ -36,6 +36,21 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
     });
   }
 
+  getTime(location) async {
+    newUrl = "http://worldtimeapi.org/api/timezone/$location";
+    newResponse = await get(Uri.parse(newUrl));
+    Map newData = jsonDecode(newResponse.body);
+    var time = newData['datetime'];
+    String dateTime = newData["utc_datetime"];
+    String offset = newData["utc_offset"];
+    DateTime now = DateTime.parse(dateTime);
+    now = now.add(Duration(
+        hours: int.parse(offset.substring(1, 3)),
+        minutes: int.parse(offset.substring(4))));
+    String newtime = DateFormat.jm().format(now);
+    return newtime;
+  }
+
   void _runFilter(String enteredKeyword) {
     List results = [];
 
@@ -132,41 +147,31 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
             : Padding(
                 padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
                 child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    physics: BouncingScrollPhysics(),
-                    itemCount: _filteredCountries.length,
-                    itemBuilder: (context, index) => GestureDetector(
-                          onTap: () async {
-                            location = _filteredCountries[index];
-                            newUrl =
-                                "http://worldtimeapi.org/api/timezone/${location}";
-                            newResponse = await get(Uri.parse(newUrl));
-                            Map newData = jsonDecode(newResponse.body);
-                            var time = newData['datetime'];
-                            String dateTime = newData["utc_datetime"];
-                            String offset = newData["utc_offset"];
-                            DateTime now = DateTime.parse(dateTime);
-                            now = now.add(Duration(
-                                hours: int.parse(offset.substring(1, 3)),
-                                minutes: int.parse(offset.substring(4))));
-                            time = DateFormat.jm().format(now);
-                            worldTimeController.WorldTimeList.add(
-                                WorldTime(location: location, time: time));
-                            Get.back();
-                          },
-                          child: ListTile(
-                            leading: Text(
-                              '${_filteredCountries[index]}',
-                              style: GoogleFonts.lato(
-                                  color: Colors.white70, fontSize: 15.0),
-                            ),
-                            trailing: Text(
-                              '${worldTimeController.getTime(_filteredCountries[index])}',
-                              style: GoogleFonts.lato(
-                                  color: Colors.white70, fontSize: 15.0),
-                            ),
+                  scrollDirection: Axis.vertical,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: _filteredCountries.length,
+                  itemBuilder: (context, index) => GestureDetector(
+                      onTap: () async {
+                        location = _filteredCountries[index];
+                        worldTimeController.WorldTimeList.add(
+                            WorldTime(location: location));
+                        Get.back();
+                      },
+                      child: ListTile(
+                          leading: Text(
+                            '${_filteredCountries[index]}',
+                            style: GoogleFonts.lato(
+                                color: Colors.white70, fontSize: 15.0),
                           ),
-                        )),
-              ));
+                          trailing: FutureBuilder(
+                              future: getTime(_filteredCountries[index]),
+                              builder: (context, AsyncSnapshot snapshot) {
+                                return Text(
+                                  '${snapshot.data}',
+                                  style: GoogleFonts.lato(
+                                      color: Colors.white70, fontSize: 15.0),
+                                );
+                              }))),
+                )));
   }
 }
