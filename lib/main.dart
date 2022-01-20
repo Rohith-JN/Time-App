@@ -1,4 +1,5 @@
 import 'package:clock_app/Screens/mainScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,6 +13,9 @@ void main() async {
     debugShowCheckedModeBanner: false,
     home: const MainScreen(),
     theme: ThemeData(
+      cupertinoOverrideTheme: const CupertinoThemeData(
+          textTheme: CupertinoTextThemeData(
+              textStyle: TextStyle(color: Colors.white))),
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       hoverColor: Colors.transparent,

@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
 import 'package:clock_app/Screens/RegionSelectScreen.dart';
 import 'package:clock_app/controllers/WorldTimeController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -20,6 +23,8 @@ class _WorldClockState extends State<WorldClock> {
   String formattedTime = DateFormat('h:mm').format(DateTime.now());
   String hour = DateFormat('a').format(DateTime.now());
   late Timer _timer;
+  var location;
+  var time;
 
   @override
   void initState() {
@@ -28,11 +33,12 @@ class _WorldClockState extends State<WorldClock> {
         Timer.periodic(const Duration(milliseconds: 500), (timer) => _update());
   }
 
+  Future<String> getDataFromFuture() async {
+    return Future.delayed(Duration(seconds: 3), () => "Sample string");
+  }
+
   void _update() {
     setState(() {
-      for (var i = 0; i < worldTimeController.WorldTimeList.length; i++) {
-        worldTimeController.WorldTimeList[i].time;
-      }
       formattedTime = DateFormat('h:mm').format(DateTime.now());
       hour = DateFormat('a').format(DateTime.now());
     });
@@ -93,18 +99,22 @@ class _WorldClockState extends State<WorldClock> {
                   height: 2.0,
                 ),
               ),
-              Container(
-                height: 600.0,
-                width: 450.0,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Obx(
-                    () => ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: worldTimeController.WorldTimeList.length,
-                        itemBuilder: (BuildContext context, index) => Padding(
+              FutureBuilder<dynamic>(
+                  future: getDataFromFuture(),
+                  builder: (context, AsyncSnapshot asyncSnapshot) {
+                    if (asyncSnapshot.data != null) {
+                      return Container(
+                        height: 600.0,
+                        width: 450.0,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: worldTimeController.WorldTimeList.length,
+                            itemBuilder: (BuildContext context, index) =>
+                                Padding(
                               padding: const EdgeInsets.only(bottom: 18.0),
                               child: Slidable(
                                 key: UniqueKey(),
@@ -114,24 +124,28 @@ class _WorldClockState extends State<WorldClock> {
                                     worldTimeController.WorldTimeList.removeAt(
                                         index);
                                   }),
-                                  children: [],
+                                  children: const [],
                                 ),
                                 child: ListTile(
                                   leading: Text(
-                                      '${worldTimeController.WorldTimeList[index].location}',
+                                      worldTimeController
+                                          .WorldTimeList[index].location,
                                       style: GoogleFonts.lato(
                                           color: Colors.white70, fontSize: 25)),
                                   trailing: Text(
-                                    "${worldTimeController.WorldTimeList[index].time}",
+                                    '${worldTimeController.getTime(worldTimeController.WorldTimeList[index].location)}',
                                     style: GoogleFonts.lato(
-                                        color: Colors.white70, fontSize: 35.0),
+                                        color: Colors.white70, fontSize: 15.0),
                                   ),
                                 ),
                               ),
-                            )),
-                  ),
-                ),
-              )
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    return CircularProgressIndicator();
+                  }),
             ],
           ),
         ),
@@ -139,7 +153,7 @@ class _WorldClockState extends State<WorldClock> {
           padding: const EdgeInsets.only(right: 192.0, bottom: 20.0),
           child: FloatingActionButton(
             onPressed: () {
-              Get.to(() => RegionSelectScreen());
+              Get.to(() => const RegionSelectScreen());
             },
             child: const Icon(Icons.public),
           ),

@@ -160,6 +160,11 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
                               style: GoogleFonts.lato(
                                   color: Colors.white70, fontSize: 15.0),
                             ),
+                            trailing: Text(
+                              '${worldTimeController.getTime(_filteredCountries[index])}',
+                              style: GoogleFonts.lato(
+                                  color: Colors.white70, fontSize: 15.0),
+                            ),
                           ),
                         )),
               ));
