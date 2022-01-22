@@ -10,9 +10,6 @@ import 'package:intl/intl.dart';
 
 class WorldTimeController extends GetxController {
   var WorldTimeList = <WorldTime>[].obs;
-  var newUrl;
-  var newResponse;
-
 
   @override
   void onInit() {

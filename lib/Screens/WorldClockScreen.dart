@@ -132,7 +132,7 @@ class _WorldClockState extends State<WorldClock> {
                             return Slidable(
                               startActionPane: ActionPane(
                                   extentRatio: 0.25,
-                                  motion: ScrollMotion(),
+                                  motion: const ScrollMotion(),
                                   children: [
                                     SlidableAction(
                                       onPressed: (v) {

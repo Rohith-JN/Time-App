@@ -32,14 +32,18 @@ class _ClockScreenState extends State<ClockScreen> {
     });
   }
 
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var timeZoneString =
         DateTime.now().timeZoneOffset.toString().split('').first;
     var offsetSign = '';
     if (!timeZoneString.startsWith('-')) offsetSign = '+';
-    print(timeZoneString);
-
+    
     return SafeArea(
       child: Scaffold(
         body: Column(

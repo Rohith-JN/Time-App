@@ -3,7 +3,7 @@ import 'package:timezone/standalone.dart';
 
 class WorldTime {
   String location;
-  
+
   WorldTime({required this.location});
 
   factory WorldTime.fromJson(Map<String, dynamic> json) =>
@@ -11,6 +11,5 @@ class WorldTime {
 
   Map<String, dynamic> toJson() => {
         'location': location,
-        
       };
 }

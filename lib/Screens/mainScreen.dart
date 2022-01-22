@@ -5,9 +5,11 @@ import 'package:clock_app/Screens/ClockScreen.dart';
 import 'package:clock_app/Screens/StopWatchScreen.dart';
 import 'package:clock_app/Screens/TimerScreen.dart';
 import 'package:clock_app/Screens/WorldClockScreen.dart';
+import 'package:clock_app/controllers/AlarmController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);

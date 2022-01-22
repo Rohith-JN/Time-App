@@ -12,19 +12,6 @@ class TimerScreen extends StatefulWidget {
 class _TimerScreenState extends State<TimerScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-            child: Container(
-      child: Center(
-          child: CupertinoTimerPicker(
-        onTimerDurationChanged: (Duration value) {},
-        mode: CupertinoTimerPickerMode.hms,
-      )),
-      width: 350.0,
-      height: 450.0,
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.white, width: 5.0),
-          shape: BoxShape.circle),
-    )));
+    return Scaffold();
   }
 }
