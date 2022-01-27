@@ -68,6 +68,7 @@ class _WorldClockState extends State<WorldClock> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Column(
@@ -115,9 +116,9 @@ class _WorldClockState extends State<WorldClock> {
               ),
               Container(
                 height: 600.0,
-                width: 450.0,
+                width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+                  padding: const EdgeInsets.only(top: 10.0, left: 29.0, right: 29.0),
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     physics: const BouncingScrollPhysics(),
@@ -131,7 +132,7 @@ class _WorldClockState extends State<WorldClock> {
                           builder: (context, AsyncSnapshot snapshot) {
                             return Slidable(
                               startActionPane: ActionPane(
-                                  extentRatio: 0.25,
+                                  extentRatio: 0.12,
                                   motion: const ScrollMotion(),
                                   children: [
                                     SlidableAction(
@@ -139,10 +140,9 @@ class _WorldClockState extends State<WorldClock> {
                                         worldTimeController.WorldTimeList
                                             .removeAt(index);
                                       },
-                                      icon: Icons.delete,
                                       spacing: 15.0,
                                       label: 'Delete',
-                                      backgroundColor: Colors.transparent,
+                                      backgroundColor: Colors.redAccent,
                                     )
                                   ]),
                               child: ListTile(
@@ -173,7 +173,7 @@ class _WorldClockState extends State<WorldClock> {
           ),
         ),
         floatingActionButton: Padding(
-          padding: const EdgeInsets.only(right: 192.0, bottom: 20.0),
+          padding: const EdgeInsets.only(bottom: 20.0),
           child: FloatingActionButton(
             onPressed: () {
               Get.to(() => const RegionSelectScreen());
