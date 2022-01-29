@@ -1,6 +1,3 @@
-import 'package:timezone/timezone.dart';
-import 'package:timezone/standalone.dart';
-
 class WorldTime {
   String location;
 

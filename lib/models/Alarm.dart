@@ -1,6 +1,5 @@
 class Alarm {
   bool alarmEnabled;
-  bool expanded;
   bool repeat;
   String time;
   String label;
@@ -12,14 +11,13 @@ class Alarm {
       required this.time,
       required this.id,
       required this.label,
-      this.expanded = false});
+      });
 
   factory Alarm.fromJson(Map<String, dynamic> json) => Alarm(
       id: json['id'],
       repeat: json['repeat'],
       alarmEnabled: json['alarmEnabled'],
       time: json['time'],
-      expanded: json['expanded'],
       label: json['time']);
 
   Map<String, dynamic> toJson() => {
@@ -28,6 +26,5 @@ class Alarm {
         'alarmEnabled': alarmEnabled,
         'time': time,
         'label': label,
-        'expanded': expanded
       };
 }

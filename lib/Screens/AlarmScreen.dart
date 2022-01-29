@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:clock_app/services/notification_service.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:clock_app/controllers/AlarmController.dart';
 import 'package:clock_app/models/Alarm.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -21,13 +19,13 @@ class AlarmScreen extends StatefulWidget {
 
 class _AlarmScreenState extends State<AlarmScreen> {
   final AlarmController alarmController = Get.put(AlarmController());
-  bool _repeatExpanded = false;
   TextEditingController textEditingController = TextEditingController();
 
   var removedLabel;
   var removedTime;
   var switchEnabled;
   var id;
+  int selected = 0;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -65,18 +63,19 @@ class _AlarmScreenState extends State<AlarmScreen> {
                 : Padding(
                     padding: const EdgeInsets.only(top: 10.0, bottom: 30.0),
                     child: ListView.builder(
+                      key: Key('builder ${selected.toString()}'),
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
                         return Padding(
                           padding:
                               const EdgeInsets.only(right: 10.0, left: 10.0),
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 5.0),
+                            padding:
+                                const EdgeInsets.only(top: 5.0, bottom: 5.0),
                             child: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(14.0),
-                                  color: (alarmController
-                                          .alarmList[index].expanded)
+                                  color: (index == selected)
                                       ? Colors.grey[850]
                                       : Colors.transparent),
                               child: ListTile(
@@ -91,6 +90,8 @@ class _AlarmScreenState extends State<AlarmScreen> {
                                           onTap: () {
                                             DatePicker.showTime12hPicker(
                                                 context,
+                                                currentTime: DateTime.now()
+                                                    .add(Duration(minutes: 5)),
                                                 theme: const DatePickerTheme(
                                                     cancelStyle: TextStyle(
                                                         color: Colors.white),
@@ -126,7 +127,8 @@ class _AlarmScreenState extends State<AlarmScreen> {
                                                               Colors.grey[800],
                                                         ),
                                                         padding:
-                                                            EdgeInsets.only(
+                                                            const EdgeInsets
+                                                                    .only(
                                                                 left: 10.0,
                                                                 top: 10.0),
                                                         height: 40.0,
@@ -190,8 +192,8 @@ class _AlarmScreenState extends State<AlarmScreen> {
                                       data: Theme.of(context).copyWith(
                                           dividerColor: Colors.transparent),
                                       child: ExpansionTile(
-                                        initiallyExpanded: alarmController
-                                            .alarmList[index].expanded,
+                                        key: Key(index.toString()),
+                                        initiallyExpanded: index == selected,
                                         backgroundColor: Colors.transparent,
                                         children: [
                                           ListTile(
@@ -236,7 +238,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
                                                                       .spaceBetween,
                                                               children: [
                                                                 TextButton(
-                                                                  child: Text(
+                                                                  child: const Text(
                                                                       'Cancel'),
                                                                   onPressed:
                                                                       () {
@@ -256,20 +258,19 @@ class _AlarmScreenState extends State<AlarmScreen> {
                                                                       Navigator.pop(
                                                                           context);
                                                                     },
-                                                                    child: Text(
+                                                                    child: const Text(
                                                                         "Done"))
                                                               ],
                                                             ),
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsets
-                                                                          .only(
+                                                                  const EdgeInsets.only(
                                                                       top: 20.0,
-                                                                      left:
-                                                                          10.0,
-                                                                      right:
-                                                                          10.0),
+                                                                      left: 10.0,
+                                                                      right: 10.0
+                                                              ),
                                                               child: TextField(
+                                                                maxLength: 25,
                                                                 style: GoogleFonts.lato(
                                                                     color: Colors
                                                                         .white),
@@ -362,16 +363,16 @@ class _AlarmScreenState extends State<AlarmScreen> {
                                                             ),
                                                             TextButton(
                                                                 onPressed: () {
-                                                                  alarmController.alarmList.add(Alarm(
-                                                                      time:
-                                                                          removedTime,
-                                                                      label:
-                                                                          removedLabel,
-                                                                      alarmEnabled:
-                                                                          switchEnabled,
-                                                                      expanded:
-                                                                          true,
-                                                                      id: id));
+                                                                  alarmController
+                                                                      .alarmList
+                                                                      .add(Alarm(
+                                                                          time:
+                                                                              removedTime,
+                                                                          label:
+                                                                              removedLabel,
+                                                                          alarmEnabled:
+                                                                              switchEnabled,
+                                                                          id: id));
                                                                 },
                                                                 child: Text(
                                                                   "Undo",
@@ -390,6 +391,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
                                                 Navigator.pop(_scaffoldKey
                                                     .currentContext!);
                                               });
+                                              selected = -1;
                                             },
                                             child: ListTile(
                                               minLeadingWidth: 30.0,
@@ -455,29 +457,37 @@ class _AlarmScreenState extends State<AlarmScreen> {
                                         tilePadding: const EdgeInsets.symmetric(
                                             horizontal: 1.0),
                                         title: Text(
-                                          getExpansionTitleInfo(alarmController.alarmList[index].repeat, alarmController.alarmList[index].label),
+                                          getExpansionTitleInfo(
+                                              alarmController
+                                                  .alarmList[index].repeat,
+                                              alarmController
+                                                  .alarmList[index].label),
                                           style: GoogleFonts.lato(
                                               color: Colors.white70),
                                         ),
                                         trailing: Icon(
-                                          alarmController
-                                                  .alarmList[index].expanded
+                                          index == selected
                                               ? Icons.arrow_drop_up
                                               : Icons.arrow_drop_down,
                                           color: Colors.white,
                                         ),
                                         onExpansionChanged: (bool expanded) {
-                                          setState(() => alarmController
-                                              .alarmList[index]
-                                              .expanded = expanded);
+                                          Duration(milliseconds: 500);
+                                          if (expanded) {
+                                            setState(() {
+                                              selected = index;
+                                            });
+                                          } else {
+                                            setState(() {
+                                              selected = -1;
+                                            });
+                                          }
                                         },
                                       ),
                                     ),
                                     Visibility(
-                                      visible: (alarmController
-                                              .alarmList[index].expanded)
-                                          ? false
-                                          : true,
+                                      visible:
+                                          (index == selected) ? false : true,
                                       child: const Divider(
                                         thickness: 2.0,
                                         color: Colors.white24,
@@ -500,6 +510,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
           child: FloatingActionButton(
             onPressed: () {
               DatePicker.showTime12hPicker(context,
+                  currentTime: DateTime.now().add(Duration(minutes: 5)),
                   theme: const DatePickerTheme(
                       cancelStyle: TextStyle(color: Colors.white),
                       backgroundColor: Color(0xFF424242),
@@ -513,7 +524,6 @@ class _AlarmScreenState extends State<AlarmScreen> {
                       id: UniqueKey().hashCode,
                       time: selectedTime,
                       label: "Alarm",
-                      expanded: true,
                       repeat: false,
                       alarmEnabled: true));
                 });

@@ -10,7 +10,7 @@ class Themes {
     timePickerTheme: TimePickerThemeData(
         backgroundColor: Colors.grey[800],
         dialTextColor: Colors.white70,
-        helpTextStyle: TextStyle(color: Colors.white70),
+        helpTextStyle: const TextStyle(color: Colors.white70),
         hourMinuteTextColor: Colors.white70,
         dayPeriodTextColor: Colors.white70,
         entryModeIconColor: Colors.white70),
