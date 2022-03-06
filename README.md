@@ -9,8 +9,8 @@
         <th scope="col">Stop watch</th>
     </tr>
     <tr>
-        <th scope="row"><img src = "https://github.com/Rohith-JN/Clock_App/blob/main/lib/screenshots/Clock.png" width = "350" height = "700"></th>
-        <td><img src = "https://github.com/Rohith-JN/Clock_App/blob/main/lib/screenshots/World_clock.png" width = "350" height = "700"></td>
-        <td><img src = "https://github.com/Rohith-JN/Clock_App/blob/main/lib/screenshots/stop_watch.png" width = "350" height = "700"> </td>
+        <th scope="row"><img src = "https://github.com/Rohith-JN/Clock_App/blob/main/lib/screenshots/Clock.png" width = "350" height = "650"></th>
+        <td><img src = "https://github.com/Rohith-JN/Clock_App/blob/main/lib/screenshots/World_clock.png" width = "350" height = "650"></td>
+        <td><img src = "https://github.com/Rohith-JN/Clock_App/blob/main/lib/screenshots/stop_watch.png" width = "350" height = "650"> </td>
     </tr>
 </table>
