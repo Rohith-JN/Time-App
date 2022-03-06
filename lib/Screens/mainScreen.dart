@@ -1,15 +1,11 @@
 // ignore_for_file: file_names
 
-import 'package:clock_app/Screens/AlarmScreen.dart';
 import 'package:clock_app/Screens/ClockScreen.dart';
 import 'package:clock_app/Screens/StopWatchScreen.dart';
-import 'package:clock_app/Screens/TimerScreen.dart';
 import 'package:clock_app/Screens/WorldClockScreen.dart';
-import 'package:clock_app/controllers/AlarmController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -25,17 +21,17 @@ class _MainScreenState extends State<MainScreen> {
       statusBarColor: Colors.grey[800],
     ));
     return DefaultTabController(
-        length: 5,
+        length: 3,
         child: SafeArea(
             child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(120),
+            preferredSize: const Size.fromHeight(120),
             child: Container(
               color: Colors.grey[800],
               height: 85.0,
               width: double.infinity,
               child: const TabBar(
-                indicator: const UnderlineTabIndicator(
+                indicator: UnderlineTabIndicator(
                     borderSide: BorderSide(
                         width: 5.0,
                         color: Colors.blue,
@@ -53,12 +49,7 @@ class _MainScreenState extends State<MainScreen> {
                     icon: Icon(Icons.public),
                     text: "World",
                   ),
-                  Tab(icon: Icon(Icons.alarm), text: "Alarm"),
                   Tab(icon: Icon(Icons.timer), text: "Start-Stop"),
-                  Tab(
-                    icon: Icon(Icons.hourglass_bottom),
-                    text: "Timer",
-                  )
                 ],
               ),
             ),
@@ -68,9 +59,7 @@ class _MainScreenState extends State<MainScreen> {
             children: <Widget>[
               ClockScreen(),
               WorldClock(),
-              AlarmScreen(),
               StopWatchScreen(),
-              TimerScreen()
             ],
           ),
         )));
