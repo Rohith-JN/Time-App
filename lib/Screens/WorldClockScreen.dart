@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'package:clock_app/Screens/RegionSelectScreen.dart';
-import 'package:clock_app/controllers/WorldTimeController.dart';
+import 'package:Clock/Screens/RegionSelectScreen.dart';
+import 'package:Clock/controllers/WorldTimeController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';

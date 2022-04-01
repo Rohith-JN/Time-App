@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
 
-import 'package:clock_app/Screens/ClockScreen.dart';
-import 'package:clock_app/Screens/StopWatchScreen.dart';
-import 'package:clock_app/Screens/WorldClockScreen.dart';
+import 'package:Clock/Screens/ClockScreen.dart';
+import 'package:Clock/Screens/StopWatchScreen.dart';
+import 'package:Clock/Screens/WorldClockScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
