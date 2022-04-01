@@ -14,9 +14,9 @@
 </p>
 <br>
 <div align = "center">
-  <img src="https://github.com/Rohith-JN/Clock_App/blob/main/lib/screenshots/Clock.png" width="240" />&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/Rohith-JN/Clock_App/blob/main/lib/screenshots/World_clock.png" width="240" /> &nbsp;&nbsp;
-  <img src="https://github.com/Rohith-JN/Clock_App/blob/main/lib/screenshots/stop_watch.png" width="240" />
+  <img src="https://github.com/Rohith-JN/Clock/blob/main/lib/screenshots/Clock.png" width="240" />&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/Rohith-JN/Clock/blob/main/lib/screenshots/World_clock.png" width="240" /> &nbsp;&nbsp;
+  <img src="https://github.com/Rohith-JN/Clock/blob/main/lib/screenshots/stop_watch.png" width="240" />
 </div>
 
 ## Libraries and Tools Used
@@ -27,7 +27,7 @@
 
 ## Preview 
 
-To view app screenshots go here: [Preview](https://github.com/Rohith-JN/Clock_App/tree/main/lib/screenshots)
+To view app screenshots go here: [Preview](https://github.com/Rohith-JN/Clock/tree/main/lib/screenshots)
 
 ## Key Features
 
@@ -44,7 +44,7 @@ To view app screenshots go here: [Preview](https://github.com/Rohith-JN/Clock_Ap
 Download or clone this repo by using the link below:
 
 ```
-https://github.com/Rohith-JN/https://github.com/Rohith-JN/Clock_App.git
+https://github.com/Rohith-JN/https://github.com/Rohith-JN/Clock.git
 ```
 
 **Step 2:**
@@ -52,7 +52,7 @@ https://github.com/Rohith-JN/https://github.com/Rohith-JN/Clock_App.git
 Cd into the project
 
 ```
-cd Clock_App
+cd Clock
 ```
 
 **Step 3:**
