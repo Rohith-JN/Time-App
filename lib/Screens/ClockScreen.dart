@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:analog_clock/analog_clock.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ClockScreen extends StatefulWidget {
   const ClockScreen({Key? key}) : super(key: key);
@@ -32,6 +30,7 @@ class _ClockScreenState extends State<ClockScreen> {
     });
   }
 
+  @override
   void dispose() {
     _timer.cancel();
     super.dispose();
@@ -75,14 +74,12 @@ class _ClockScreenState extends State<ClockScreen> {
                       ],
                     ),
                   ),
-                  Container(
-                    child: Text(
-                      DateFormat('EE,  MMM d').format(DateTime.now()),
-                      style: GoogleFonts.lato(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                        letterSpacing: 2.0,
-                      ),
+                  Text(
+                    DateFormat('EE,  MMM d').format(DateTime.now()),
+                    style: GoogleFonts.lato(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      letterSpacing: 2.0,
                     ),
                   ),
                   const Padding(

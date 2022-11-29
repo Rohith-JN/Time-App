@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
-import 'package:Clock/Screens/RegionSelectScreen.dart';
-import 'package:Clock/controllers/WorldTimeController.dart';
+import 'package:clock/Screens/RegionSelectScreen.dart';
+import 'package:clock/controllers/WorldTimeController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
@@ -97,14 +96,12 @@ class _WorldClockState extends State<WorldClock> {
                   ],
                 ),
               ),
-              Container(
-                child: Text(
-                  DateFormat('EE,  MMM d').format(DateTime.now()),
-                  style: GoogleFonts.lato(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    letterSpacing: 2.0,
-                  ),
+              Text(
+                DateFormat('EE,  MMM d').format(DateTime.now()),
+                style: GoogleFonts.lato(
+                  color: Colors.white,
+                  fontSize: 20.0,
+                  letterSpacing: 2.0,
                 ),
               ),
               const Padding(
@@ -146,17 +143,15 @@ class _WorldClockState extends State<WorldClock> {
                                     )
                                   ]),
                               child: ListTile(
-                                  leading: Container(
-                                    child: ConstrainedBox(
-                                      constraints: BoxConstraints(
-                                          minWidth: 10.0, maxWidth: 300.0),
-                                      child: Text(
-                                          worldTimeController
-                                              .WorldTimeList[index].location,
-                                          style: GoogleFonts.lato(
-                                              color: Colors.white70,
-                                              fontSize: 23)),
-                                    ),
+                                  leading: ConstrainedBox(
+                                    constraints: const BoxConstraints(
+                                        minWidth: 10.0, maxWidth: 300.0),
+                                    child: Text(
+                                        worldTimeController
+                                            .WorldTimeList[index].location,
+                                        style: GoogleFonts.lato(
+                                            color: Colors.white70,
+                                            fontSize: 23)),
                                   ),
                                   trailing: Text(
                                     '${snapshot.data}',

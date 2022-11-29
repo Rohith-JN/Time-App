@@ -1,17 +1,13 @@
 // ignore_for_file: file_names
 
 import 'dart:convert';
-import 'dart:developer';
-import 'package:Clock/controllers/WorldTimeController.dart';
-import 'package:Clock/models/WorldTime.dart';
+import 'package:clock/controllers/WorldTimeController.dart';
+import 'package:clock/models/WorldTime.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
-import 'package:timezone/timezone.dart';
-import 'package:timezone/standalone.dart';
 
 class RegionSelectScreen extends StatefulWidget {
   const RegionSelectScreen({Key? key}) : super(key: key);
@@ -24,7 +20,7 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
   final WorldTimeController worldTimeController = Get.find();
   List _countries = [];
   List _filteredCountries = [];
-  TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
 
   Future<void> fetchData() async {
     const url = "http://worldtimeapi.org/api/timezone";
@@ -113,7 +109,7 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
                             ),
                             onPressed: () {
                               setState(() {
-                                _textEditingController..text = '';
+                                _textEditingController.text = '';
                                 _filteredCountries = [];
                               });
                             },
@@ -148,7 +144,7 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
                 padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemCount: _filteredCountries.length,
                   itemBuilder: (context, index) => GestureDetector(
                       onTap: () async {

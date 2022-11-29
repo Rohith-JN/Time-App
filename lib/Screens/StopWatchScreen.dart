@@ -26,6 +26,7 @@ class _StopWatchScreenState extends State<StopWatchScreen>
         AnimationController(vsync: this, duration: Duration(milliseconds: 200));
   }
 
+  @override
   void dispose() {
     super.dispose();
     _stopWatchTimer.dispose();
@@ -68,7 +69,7 @@ class _StopWatchScreenState extends State<StopWatchScreen>
             ),
             Visibility(
               visible: lapClicked,
-              child: Container(
+              child: SizedBox(
                 height: 210.0,
                 child: StreamBuilder<List<StopWatchRecord>>(
                   stream: _stopWatchTimer.records,
@@ -81,11 +82,11 @@ class _StopWatchScreenState extends State<StopWatchScreen>
                     Future.delayed(const Duration(milliseconds: 100), () {
                       scrollController.animateTo(
                           scrollController.position.maxScrollExtent,
-                          duration: Duration(milliseconds: 200),
+                          duration: const Duration(milliseconds: 200),
                           curve: Curves.ease);
                     });
                     return ListView.builder(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       itemCount: value.length,
                       itemBuilder: (context, index) {
                         final data = value[index];

@@ -1,5 +1,5 @@
-import 'package:Clock/Screens/mainScreen.dart';
-import 'package:Clock/constants/themes.dart';
+import 'screens/MainScreen.dart';
+import 'constants/themes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
