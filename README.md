@@ -14,9 +14,9 @@
 </p>
 <br>
 <div align = "center">
-  <img src="https://github.com/Rohith-JN/Clock/blob/main/lib/screenshots/Clock.png" width="240" />&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/Rohith-JN/Clock/blob/main/lib/screenshots/World_clock.png" width="240" /> &nbsp;&nbsp;
-  <img src="https://github.com/Rohith-JN/Clock/blob/main/lib/screenshots/stop_watch.png" width="240" />
+  <img src="https://github.com/Rohith-JN/Clock/blob/main/lib/screenshots/ClockScreen.png" width="240" />&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/Rohith-JN/Clock/blob/main/lib/screenshots/WorldClockScreen.png" width="240" /> &nbsp;&nbsp;
+  <img src="https://github.com/Rohith-JN/Clock/blob/main/lib/screenshots/StopWatchScreen.png" width="240" />
 </div>
 
 ## Libraries and Tools Used
@@ -34,31 +34,3 @@ To view app screenshots go here: [Preview](https://github.com/Rohith-JN/Clock/tr
 * View the current time through analog clock or digital clock
 * Get time of various locations
 * Stopwatch
-
-## How To Use
-
-* To clone and run this application, you'll need [Git](https://git-scm.com) and [Flutter](https://flutter.dev/docs/get-started/install) installed on your computer. From your command line:
-
-**Step 1:**
-
-Download or clone this repo by using the link below:
-
-```
-https://github.com/Rohith-JN/https://github.com/Rohith-JN/Clock.git
-```
-
-**Step 2:**
-
-Cd into the project
-
-```
-cd Clock
-```
-
-**Step 3:**
-
-Run the project either through android emulator or connected mobile phone
-
-```
-flutter run
-```
