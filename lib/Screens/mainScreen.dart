@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:clock_app/Screens/ClockScreen.dart';
 import 'package:clock_app/Screens/StopWatchScreen.dart';
 import 'package:clock_app/Screens/WorldClockScreen.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
       statusBarColor: Colors.grey[800],
     ));
     return DefaultTabController(
-        length: 3,
+        length: 2,
         child: SafeArea(
             child: Scaffold(
           appBar: PreferredSize(
@@ -38,13 +37,8 @@ class _MainScreenState extends State<MainScreen> {
                         style: BorderStyle.solid),
                     insets: EdgeInsets.symmetric(horizontal: 30.0)),
                 tabs: [
-                  Tab(
-                    icon: Icon(
-                      FontAwesomeIcons.clock,
-                      size: 20.0,
-                    ),
-                    text: "Clock",
-                  ),
+                  
+                  
                   Tab(
                     icon: Icon(Icons.public),
                     text: "World",
@@ -57,7 +51,6 @@ class _MainScreenState extends State<MainScreen> {
           body: const TabBarView(
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
-              ClockScreen(),
               WorldClock(),
               StopWatchScreen(),
             ],
