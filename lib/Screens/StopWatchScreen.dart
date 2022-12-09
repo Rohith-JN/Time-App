@@ -23,7 +23,7 @@ class _StopWatchScreenState extends State<StopWatchScreen>
   void initState() {
     super.initState();
     controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+        AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
   }
 
   @override

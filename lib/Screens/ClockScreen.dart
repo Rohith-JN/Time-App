@@ -38,11 +38,6 @@ class _ClockScreenState extends State<ClockScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var timeZoneString =
-        DateTime.now().timeZoneOffset.toString().split('').first;
-    var offsetSign = '';
-    if (!timeZoneString.startsWith('-')) offsetSign = '+';
-    
     return SafeArea(
       child: Scaffold(
         body: Column(

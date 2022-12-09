@@ -1,4 +1,4 @@
-import "package:clock/models/WorldTime.dart";
+import "package:clock_app/models/WorldTime.dart";
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 

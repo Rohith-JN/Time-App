@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
 
 import 'dart:convert';
-import 'package:clock/controllers/WorldTimeController.dart';
-import 'package:clock/models/WorldTime.dart';
+import 'package:clock_app/controllers/WorldTimeController.dart';
+import 'package:clock_app/models/WorldTime.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,7 +36,6 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
     newUrl = "http://worldtimeapi.org/api/timezone/$location";
     newResponse = await get(Uri.parse(newUrl));
     Map newData = jsonDecode(newResponse.body);
-    var time = newData['datetime'];
     String dateTime = newData["utc_datetime"];
     String offset = newData["utc_offset"];
     DateTime now = DateTime.parse(dateTime);
@@ -92,7 +91,16 @@ class _RegionSelectScreenState extends State<RegionSelectScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 3.5),
                   child: TextField(
-                      onChanged: (value) => _runFilter(value),
+                      onChanged: (value) {
+                        if (value.isNotEmpty) {
+                          _runFilter(value);
+                        } else {
+                          setState(() {
+                            _textEditingController.text = '';
+                            _filteredCountries = [];
+                          });
+                        }
+                      },
                       autofocus: true,
                       style: GoogleFonts.lato(color: Colors.white70),
                       controller: _textEditingController,
