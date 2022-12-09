@@ -1,4 +1,4 @@
-package com.example.clock_app
+package `in`.rohithnambiar.clock_app
 
 import io.flutter.embedding.android.FlutterActivity
 
