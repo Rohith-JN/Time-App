@@ -138,23 +138,20 @@ class _StopWatchScreenState extends State<StopWatchScreen>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Visibility(
-                visible: (_stopWatchTimer.rawTime.value != 0) ? true : false,
-                child: FloatingActionButton(
-                  onPressed: isPlaying
-                      ? null
-                      : () {
-                          setState(() {
-                            value = 190.0;
-                            lapClicked = false;
-                          });
-                          controller.reverse();
-                          _stopWatchTimer.onExecute.add(StopWatchExecute.reset);
-                        },
-                  child: const Icon(
-                    Icons.refresh,
-                    size: 30.0,
-                  ),
+              FloatingActionButton(
+                onPressed: isPlaying
+                    ? null
+                    : () {
+                        setState(() {
+                          value = 190.0;
+                          lapClicked = false;
+                        });
+                        controller.reverse();
+                        _stopWatchTimer.onExecute.add(StopWatchExecute.reset);
+                      },
+                child: const Icon(
+                  Icons.refresh,
+                  size: 30.0,
                 ),
               ),
               FloatingActionButton(
@@ -172,22 +169,19 @@ class _StopWatchScreenState extends State<StopWatchScreen>
                   progress: controller,
                 ),
               ),
-              Visibility(
-                visible: (_stopWatchTimer.rawTime.value != 0) ? true : false,
-                child: FloatingActionButton(
-                  onPressed: isPlaying
-                      ? () {
-                          setState(() {
-                            value = 10.0;
-                            lapClicked = true;
-                          });
-                          _stopWatchTimer.onExecute.add(StopWatchExecute.lap);
-                        }
-                      : null,
-                  child: const Icon(
-                    Icons.timer,
-                    size: 30.0,
-                  ),
+              FloatingActionButton(
+                onPressed: isPlaying
+                    ? () {
+                        setState(() {
+                          value = 10.0;
+                          lapClicked = true;
+                        });
+                        _stopWatchTimer.onExecute.add(StopWatchExecute.lap);
+                      }
+                    : null,
+                child: const Icon(
+                  Icons.timer,
+                  size: 30.0,
                 ),
               ),
             ],

@@ -115,7 +115,8 @@ class _WorldClockState extends State<WorldClock> {
                 height: 600.0,
                 width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 10.0, left: 29.0, right: 29.0),
+                  padding:
+                      const EdgeInsets.only(top: 10.0, left: 29.0, right: 29.0),
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     physics: const BouncingScrollPhysics(),
@@ -156,7 +157,7 @@ class _WorldClockState extends State<WorldClock> {
                                   trailing: Text(
                                     '${snapshot.data}',
                                     style: GoogleFonts.lato(
-                                        color: Colors.white, fontSize: 35.0),
+                                        color: Colors.white, fontSize: 25.0),
                                   )),
                             );
                           }),
