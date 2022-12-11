@@ -83,13 +83,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_datetime_picker:
-    dependency: "direct main"
-    description:
-      name: flutter_datetime_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.5.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -270,13 +263,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.7"
-  simple_timer:
-    dependency: "direct main"
-    description:
-      name: simple_timer
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -317,13 +303,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
-  system_settings:
-    dependency: "direct main"
-    description:
-      name: system_settings
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.0"
   term_glyph:
     dependency: transitive
     description:

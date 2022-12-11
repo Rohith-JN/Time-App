@@ -1,9 +1,8 @@
 // ignore_for_file: file_names
 
+import 'package:clock_app/Screens/ClockScreen.dart';
 import 'package:clock_app/Screens/StopWatchScreen.dart';
 import 'package:clock_app/Screens/WorldClockScreen.dart';
-import 'package:clock_app/screens/AlarmScreen.dart';
-import 'package:clock_app/screens/TimerScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
       statusBarColor: Colors.grey[800],
     ));
     return DefaultTabController(
-        length: 4,
+        length: 3,
         child: SafeArea(
             child: Scaffold(
           appBar: PreferredSize(
@@ -40,15 +39,17 @@ class _MainScreenState extends State<MainScreen> {
                     insets: EdgeInsets.symmetric(horizontal: 30.0)),
                 tabs: [
                   Tab(
+                    icon: Icon(
+                      FontAwesomeIcons.clock,
+                      size: 20.0,
+                    ),
+                    text: "Clock",
+                  ),
+                  Tab(
                     icon: Icon(Icons.public),
                     text: "World",
                   ),
-                  Tab(icon: Icon(Icons.alarm), text: "Alarm"),
                   Tab(icon: Icon(Icons.timer), text: "StopWatch"),
-                  Tab(
-                    icon: Icon(Icons.hourglass_bottom),
-                    text: "Timer",
-                  )
                 ],
               ),
             ),
@@ -56,10 +57,9 @@ class _MainScreenState extends State<MainScreen> {
           body: const TabBarView(
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
+              ClockScreen(),
               WorldClock(),
-              AlarmScreen(),
               StopWatchScreen(),
-              TimerScreen()
             ],
           ),
         )));
